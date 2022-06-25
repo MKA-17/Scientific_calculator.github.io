@@ -98,9 +98,7 @@ input:hover{color: red;}
         <br>
        Answer:  <input type="button" class="screen" id="result" >
     </fieldset>
-    <script>
-        let total = '';
-    </script>
+    
         <table>
             <tr>
                 <td>
@@ -236,105 +234,114 @@ input:hover{color: red;}
 </body>
 <script>
     let screen = document.getElementById("disp");
-    let result_screen = document.getElementById("result");
+    let result_screen =  document.getElementById("result");
+    
+    let sec_val = [];
+     let total = [];
+     
     function button_value(e)// this e parameter gets that element by using the this keyword
     {
         if(e.value == "sin(")
         {
-            total += "Math.sin( Math.PI / 180*";
-            screen.value += e.value;
+            total.push( "Math.sin( Math.PI / 180*");
+            sec_val.push( e.value);
         }
         else if(e.value == "cos(")
         {
-            total += "Math.cos( Math.PI / 180*";
-            screen.value += e.value;
+            total.push( "Math.cos( Math.PI / 180*");
+            sec_val.push( e.value);
         }
         else if(e.value == "tan(")
         {
-            total += "Math.tan( Math.PI / 180*";
-            screen.value += e.value;
+            total.push("Math.tan( Math.PI / 180*");
+            sec_val.push( e.value);
         }
         else if(e.value == "asin(")
         {
-            total += "180/Math.PI*Math.asin(";
-            screen.value += e.value;
+            total .push( "180/Math.PI*Math.asin(");
+            sec_val.push( e.value);
         }
        else  if(e.value == "acos(")
         {
-            total += "180/Math.PI*Math.acos(";
-            screen.value += e.value;
+            total.push( "180/Math.PI*Math.acos(");
+            sec_val.push( e.value);
         }
         else if(e.value == "atan(")
         {
-            total += "180/Math.PI*Math.atan(";
-            screen.value += e.value;
+            total.push( "180/Math.PI*Math.atan(");
+            sec_val.push( "atan(");
         }
         else if(e.value == "e")
         {
-            total += "Math.E";
-            screen.value += e.value;
+            total.push( "Math.E");
+            sec_val.push( e.value);
         }
         else if (e.value == "X^n")
         {
-            total += '**';
-        screen.value += '^';
+            total.push( '**');
+            sec_val.push( '^');
 
         }
         else if (e.value == "π")
         {
-            total += 'Math.PI';
-        screen.value += 'π';
+            total.push( 'Math.PI');
+            sec_val.push( 'π');
 
         
         }
         else  if (e.value == "√(")
         {
-            total += 'Math.sqrt(';
-        screen.value += '√(';
+            total.push( 'Math.sqrt(');
+            sec_val.push( '√(');
 
         
         }
         else  if (e.value == "ln(")
         {
-            total += 'Math.cbrt(';
-        screen.value += 'ln(';
+            total.push( 'Math.log(');
+            sec_val.push( 'ln(');
 
         
         }
         else  if (e.value == "3√(")
         {
-            total += 'Math.cbrt(';
-        screen.value += e.value;
+            total.push( 'Math.cbrt(');
+        sec_val.push( '3√(');
 
         
         }
         else  if (e.value == "f(")
         {
-            total += ' factorial(';
-            screen.value += e.value;
+            total.push( ' factorial(');
+            sec_val.push( 'f(');
 
         
         }
         else  if (e.value == "X^2")
         {
-            total += '**2';
-            screen.value += '^2';
+            total.push( '**2');
+            sec_val.push( '^2');
 
         
         }
         else{
-        total += e.value;
-        screen.value += e.value;}
-        console.log(total);
+        total.push( e.value);
+        sec_val.push( e.value);
+    }
+        console.log("Ans: ",total);
+        screen.value = sec_val.join('');
+        console.log("Screen value: ",sec_val);
 
     }
+
+
 //console.log(Math.cos())
 function calculate()
 {
    try{
-    result_screen.value = eval(total);
+    result_screen.value = eval(total.join(''));
 
-    console.log(total);
+    console.log(total.join(''));
     
    }
    catch(err)
@@ -345,17 +352,25 @@ function calculate()
 
 function erase()
 {
-    (screen.value) = screen.value.slice(0,screen.value.length-1);
-    total = total.slice(0,total.length-1);
-    console.log("erase", total);
+    sec_val.pop();
+    (screen.value) = sec_val.join('');
+    total.pop();
+    //total = total;
+    console.log("Ans: ", total);
+    console.log("Screen value: ",sec_val);
+    
+    
     
     
 }
 function CLR()
 {
    
-    result_screen.value = screen.value = ' ';
-    total = ' ';
+    sec_val = [];
+    result_screen.value = screen.value = sec_val;
+    total = [];
+    console.log("Ans: ", total);
+    console.log("Screen value: ",sec_val);
 
 
 
@@ -370,7 +385,12 @@ function factorial(n){
     }
     return answer;
   }  
+
 }
+let arr = ['3','5'];
+
+arr.push(3);
+console.log("tfdxs",arr.join(''))
 //console.log(eval())
 </script>
 </html>
